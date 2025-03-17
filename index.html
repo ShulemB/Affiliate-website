@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Deals</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="site-title">TODAY'S DEALS</h1>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search" class="search-input">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="filter-container">
+                <button class="filter-dropdown">
+                    <span class="button-text">Deals Sort By: Recent</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <button class="filter-dropdown">
+                    <span class="button-text">Category: All</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="deals-container">
+            <div class="deals-header">
+                
+                <div class="deals-count">Loading deals...</div>
+            </div>
+            
+            <div class="filters-bar">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Electronics</button>
+                <button class="filter-btn">Fashion</button>
+                <button class="filter-btn">Home</button>
+                <button class="filter-btn">Travel</button>
+            </div>
+
+            <div id="products" class="deals-grid">
+                <!-- Deals will be dynamically loaded here -->
+                <div class="loading">Finding the best deals...</div>
+            </div>
+            
+            <div class="pagination">
+                <!-- Pagination controls will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Never Miss a Deal</h3>
+                <p>Subscribe to get the latest deals directly in your inbox.</p>
+                <form class="newsletter-signup">
+                    <input 
+                        type="email" 
+                        id="newsletter-email" 
+                        placeholder="Enter your email" 
+                        required 
+                        pattern="[^@\s]+@[^@\s]+\.[^@\s]+" 
+                        title="Please enter a valid email address"
+                    >
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/DealFinder" target="_blank" class="social-icon">
+                        <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/DealFinder" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/DealFinder" target="_blank" class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 DealFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

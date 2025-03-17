@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "stone-nuance-453503-j2",
+  "private_key_id": "e6e3cb56f7a194688fadf99708c18a0a2990ca43",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2DfHifqvXdNrF\nYldrA++V4uDhrID36JiWpZO0e2NIK1R+LFTWeS5hcUG4ZAHOay/Dd2srAF0Z/CK1\ntcjCAHv92Zwd7rlHPxAXGV/pTVgxtb+zuWicZMzWTX5Edx/xpG/ri+THnZEssIVx\nOiR+8ag7AXt2BzyqPTlJUV3INlpXkz6u3Z5liMLp9D1b/wqidbsU/gkIYZ+sl7tf\nk4bQFSnOxjiciLOsSAaia/y94plhp4ORodNNk92GRfniEXe3/LxAFGBGKShKjIZq\n0hAaABqXk9LfdKsdV5VSHh0E7/aOCdV0EUt52UCOSz82NS731DcuevBgih1++vbb\nFvCLBh07AgMBAAECggEAVyyfPhLkyyM33JtF+8bjMvT0NOvKx6rXYg+ABkStGjIx\nX8dvilF1jZBTZW1x1ftKYEEvDmS6sAYlQrh8nLTpqnjIgia9DmoalM0AObFhAVCj\nrnYiKv0zfoyV4UffgnB4bSRMFO+Uw/70ru6l6iliInsHuNEnUedGJp7xFr08DkFx\nNavwwtwvL25EzrdrkGKZlm8yPCJUQ/+LP/Pjwlzk/4y2WE81l7JECKYSaKKCIetx\nwmhjvHcculQejsS0i+bLe9XowseR6zo1NP11uzzH3201oH42xFZPC7b4msjSLK06\nsSD6WfWoJUvbTInqi6Dnx1pxEtjvW8OpwsVD+v8BaQKBgQD5UClf6DH07a1l5SPK\nV8ZsdtHv9IpTFssePYt1/qyNWZdIxrnBjfV8eQMwxJrHIteWC9CFEQePwU7uOOVB\n27dVKvMhoCSzhCJl5alWVBCjRsEUBjO6jhvRgvGciJO3n+4+jVYIglLdwQj/zZyh\nH88CBS/6BGv5KMJ9UEkcr7+LUwKBgQC67/h5tTDnWc4IYcNPZr3kq3iVOfcior8+\n1Ix91cenPAdq+Z7ARIalG3Rt3G+J7qiLkhf7heH4UoSo2yPvmgL+/l/5969sS/ux\nbWcPi6Dbm8iNU2qGf0KW+G5eULab01wLV0szJlE5wcCa7SC2jeiFn1UhqI0NTloz\n1NOWwvhReQKBgAGYDJurXV5mgpxLKb5qbz9URyVUl+nOFIBd/l1DwpCoyPnTI27k\nXHRuRaHzL9YkF+LCspOXN0gpATsuq/CO2g42VxWY84MeTiX+oOWHZg/VLPjWzU/d\nBrqBLtBEY0ViRWCrAKjPRH5cdJVGGEFDdcxagiMEEjimlQ++CqmfSgc3AoGAEPaT\nqp+ph2Tb0GDmsz7Ufnqc35W5+legWRg6g3SxwFgvKCLsp+/P9A2QvCNjr7WLb9ba\n/EUC42DBjv0LvsNQAEme9fTm40Hl3gzabEu0VhlF0qU+JmRH66ExirdySqOcV58d\nQM/6UO5nBuf7rvUjo3R46iv8WLfCca+fX6/jjqkCgYAsMAmG/9ub7kj7bv1ATQVH\nSXmWHC7/6KHOWOoVuf4Wlq5SKhWSZuM46LyhTRrME56cqroW0bBfZMzcfbH+59ZU\nhGkwUAX4kXQ8nwtsoB8PDv7wrWq9ifLeW/gRVszknBCjTuW0vnHHyOKhemJg75DJ\nZQ0svhaaMPgFgLUUSajvyw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "affiliate-website@stone-nuance-453503-j2.iam.gserviceaccount.com",
+  "client_id": "110423948972073502869",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/affiliate-website%40stone-nuance-453503-j2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
