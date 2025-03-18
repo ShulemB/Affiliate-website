@@ -431,7 +431,77 @@ function copyToClipboard(text) {
     });
 }
 
-// Render products to the DOM
+// Add share functionality
+function shareOnPlatform(platform, url, title) {
+    let shareUrl;
+    switch (platform) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
+            break;
+        case 'email':
+            shareUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+            break;
+        case 'pinterest':
+            shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(title)}`;
+            break;
+    }
+    if (platform === 'copy') {
+        navigator.clipboard.writeText(url).then(() => {
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = 'Link copied to clipboard!';
+            document.body.appendChild(notification);
+            setTimeout(() => notification.classList.add('show'), 10);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        });
+    } else {
+        window.open(shareUrl, '_blank');
+    }
+}
+
+// Add toggle share buttons functionality
+function toggleShareButtons(shareId) {
+    const targetButtons = document.getElementById(`share-buttons-${shareId}`);
+    const targetArrow = targetButtons.previousElementSibling.querySelector('.share-arrow');
+    
+    // Close all other share buttons first
+    document.querySelectorAll('.share-buttons').forEach(buttons => {
+        if (buttons.id !== `share-buttons-${shareId}`) {
+            buttons.style.display = 'none';
+            buttons.previousElementSibling.querySelector('.share-arrow').classList.remove('active');
+        }
+    });
+
+    // Toggle the clicked share buttons
+    if (targetButtons.style.display === 'flex') {
+        targetButtons.style.display = 'none';
+        targetArrow.classList.remove('active');
+    } else {
+        targetButtons.style.display = 'flex';
+        targetArrow.classList.add('active');
+    }
+}
+
+// Close share buttons when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.share-container')) {
+        document.querySelectorAll('.share-buttons').forEach(buttons => {
+            buttons.style.display = 'none';
+            buttons.previousElementSibling.querySelector('.share-arrow').classList.remove('active');
+        });
+    }
+});
+
+// Update renderProducts function
 function renderProducts(productsToRender) {
     const filteredProducts = productsToRender
         .filter(product => product.approve)
@@ -443,7 +513,7 @@ function renderProducts(productsToRender) {
     }
 
     productsContainer.innerHTML = filteredProducts
-        .map(product => {
+        .map((product, index) => {
             const isExpired = new Date() > product.dateE;
             const discountedPrice = formatPrice(product.discountPrice);
             const originalPrice = formatPrice(product.fullPrice);
@@ -461,24 +531,52 @@ function renderProducts(productsToRender) {
                     <div class="product-info">
                         <h2 class="product-title">${product.item}</h2>
                         <div class="product-price">
-                            <span class="current-price">${discountedPrice}</span>
-                            <span class="original-price">${originalPrice}</span>
-                            ${product.discount > 0 ? 
-                            `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
-                        </div>
-                        ${product.promoCode ? `
-                            <div class="promo-code">
-                                <span>Code: <strong>${product.promoCode}</strong></span>
-                                <button class="copy-btn" onclick="copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>Copy Code</button>
+                            <div class="price-line">
+                                <span class="current-price">${discountedPrice}</span>
+                                <span class="original-price">${originalPrice}</span>
                             </div>
-                        ` : ''}
-                        <div class="deal-meta">
-                            <span class="time-remaining">
-                                <i class="fas fa-clock"></i> ${timeRemaining}
-                            </span>
-                            <span class="category">
-                                <i class="fas fa-tag"></i> ${product.category}
-                            </span>
+                            <div class="price-actions">
+                                ${product.discount > 0 ? 
+                                `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
+                                ${product.promoCode ? `
+                                    <button class="copy-btn" onclick="copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
+                                        <i class="fas fa-copy"></i> ${product.promoCode}
+                                    </button>
+                                ` : ''}
+                                <div class="share-container">
+                                    <button class="share-btn-main" onclick="event.stopPropagation(); toggleShareButtons(${index})">
+                                        <img src="Arrow.png" alt="Share" class="share-arrow">
+                                    </button>
+                                    <div class="share-buttons" id="share-buttons-${index}" style="display: none;">
+                                        <button onclick="event.stopPropagation(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
+                                            <i class="fas fa-link"></i>
+                                        </button>
+                                        <button onclick="event.stopPropagation(); shareOnPlatform('whatsapp', '${product.link}', '${product.item}')" class="share-option">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
+                                        <button onclick="event.stopPropagation(); shareOnPlatform('facebook', '${product.link}', '${product.item}')" class="share-option">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </button>
+                                        <button onclick="event.stopPropagation(); shareOnPlatform('email', '${product.link}', '${product.item}')" class="share-option">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                        <button onclick="event.stopPropagation(); shareOnPlatform('twitter', '${product.link}', '${product.item}')" class="share-option">
+                                            <i class="fab fa-twitter"></i>
+                                        </button>
+                                        <button onclick="event.stopPropagation(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
+                                            <i class="fab fa-pinterest-p"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="deal-meta">
+                                <span class="time-remaining">
+                                    <i class="fas fa-clock"></i> ${timeRemaining}
+                                </span>
+                                <span class="category">
+                                    <i class="fas fa-tag"></i> ${product.category}
+                                </span>
+                            </div>
                         </div>
                         ${isExpired ? `
                             <button class="buy-button expired" disabled>EXPIRED</button>
