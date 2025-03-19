@@ -540,14 +540,17 @@ function renderProducts(productsToRender) {
                                 `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
                                 ${product.promoCode ? `
                                     <button class="copy-btn" onclick="copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
-                                        <i class="fas fa-copy"></i> ${product.promoCode}
+                                        <i class="fas fa-copy"></i> COPY CODE
                                     </button>
                                 ` : ''}
                                 <div class="share-container">
                                     <button class="share-btn-main" onclick="event.stopPropagation(); toggleShareButtons(${index})">
                                         <img src="Arrow.png" alt="Share" class="share-arrow">
                                     </button>
+                                    
                                     <div class="share-buttons" id="share-buttons-${index}" style="display: none;">
+                            
+                                    
                                         <button onclick="event.stopPropagation(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
                                             <i class="fas fa-link"></i>
                                         </button>
@@ -566,6 +569,7 @@ function renderProducts(productsToRender) {
                                         <button onclick="event.stopPropagation(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
                                             <i class="fab fa-pinterest-p"></i>
                                         </button>
+                                    
                                     </div>
                                 </div>
                             </div>
