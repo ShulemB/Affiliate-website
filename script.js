@@ -524,7 +524,7 @@ function renderProducts(productsToRender) {
                 <div class="product-card ${isExpired ? 'expired' : ''}">
                     <div class="card-header">
                         <div class="post-meta">
-                            ${product.company} · ${timeSincePosted}
+                            ${product.company} ·<br> ${timeSincePosted}
                         </div>
                         <img src="${product.picture}" alt="${product.item}" class="product-image">
                     </div>
