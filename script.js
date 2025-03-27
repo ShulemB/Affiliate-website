@@ -352,19 +352,20 @@ async function fetchProducts() {
         
         // Skip header row and process data
         products = data.values.slice(1).map(row => ({
-            dateEntered: row[0],
-            item: row[1],
-            discountPrice: parseFloat(row[2]),
-            fullPrice: parseFloat(row[3]),
-            promoCode: row[4] || '',
-            picture: row[5],
-            link: row[6],
+            ID: row[0],
+            dateEntered: row[1],
+            item: row[2],
+            discountPrice: parseFloat(row[3]),
+            fullPrice: parseFloat(row[4]),
+            promoCode: row[5] || '',
+            picture: row[6],
+            link: row[7],
             dateE: new Date(row[8]),
             approve: row[9] === 'TRUE',
             category: (row[10] || 'Other').trim(),
             company: row[11] || 'Unknown',
             // Calculate discount percentage
-            discount: Math.round(((parseFloat(row[3]) - parseFloat(row[2])) / parseFloat(row[3])) * 100)
+            discount: Math.round(((parseFloat(row[4]) - parseFloat(row[3])) / parseFloat(row[4])) * 100)
         }));
 
         const categories = getDistinctCategories(products);
@@ -547,10 +548,7 @@ function renderProducts(productsToRender) {
                                     <button class="share-btn-main" onclick="event.stopPropagation(); toggleShareButtons(${index})">
                                         <img src="Arrow.png" alt="Share" class="share-arrow">
                                     </button>
-                                    
                                     <div class="share-buttons" id="share-buttons-${index}" style="display: none;">
-                            
-                                    
                                         <button onclick="event.stopPropagation(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
                                             <i class="fas fa-link"></i>
                                         </button>
@@ -569,7 +567,6 @@ function renderProducts(productsToRender) {
                                         <button onclick="event.stopPropagation(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
                                             <i class="fab fa-pinterest-p"></i>
                                         </button>
-                                    
                                     </div>
                                 </div>
                             </div>
@@ -754,5 +751,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Initial load
-fetchProducts(); 
+// Initialize pages
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProducts();
+}); 
