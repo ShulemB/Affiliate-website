@@ -522,7 +522,7 @@ function renderProducts(productsToRender) {
             const timeRemaining = getTimeRemaining(product.dateE);
             
             return `
-                <div class="product-card ${isExpired ? 'expired' : ''}">
+                <div class="product-card ${isExpired ? 'expired' : ''}" data-product-id="${product.ID}">
                     <div class="card-header">
                         <div class="post-meta">
                             ${product.company} ·<br> ${timeSincePosted}
@@ -540,7 +540,7 @@ function renderProducts(productsToRender) {
                                 ${product.discount > 0 ? 
                                 `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
                                 ${product.promoCode ? `
-                                    <button class="copy-btn" onclick="copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
+                                    <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
                                         <i class="fas fa-copy"></i> COPY CODE
                                     </button>
                                 ` : ''}
@@ -582,15 +582,26 @@ function renderProducts(productsToRender) {
                         ${isExpired ? `
                             <button class="buy-button expired" disabled>EXPIRED</button>
                         ` : `
-                            <a href="${product.link}" target="_blank" class="buy-button">
-                                Get Deal 
-                            </a>
+                            <!--<button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">-->
+
+                            <button onclick="" class="buy-button">
+                            
+                                Get Deal
+                            </button>
                         `}
                     </div>
                 </div>
             `;
         })
         .join('');
+
+    // Add click event listeners to product cards
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const productId = card.dataset.productId;
+            window.location.href = `details.html?id=${productId}`;
+        });
+    });
 }
 
 // Event listeners

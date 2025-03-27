@@ -1,0 +1,323 @@
+/* Product Details Page Styles */
+:root {
+    --primary-color: #146ff5;
+    --secondary-color: #0e4eac;
+    --text-color: #333;
+    --light-gray: #f5f5f5;
+    --border-color: #e0e0e0;
+    --success-color: #4CAF50;
+    --danger-color: #E83445;
+}
+
+.product-details-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.product-details {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+    display: flex;
+    min-height: 600px;
+}
+
+.product-details-header {
+    position: relative;
+    width: 50%;
+    min-width: 500px;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid var(--border-color);
+}
+
+.product-meta {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+
+
+.product-details-image {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Keeps the container square */
+    object-fit: contain; /* Shows the full image without cropping */
+    background: white;
+    border-radius: 8px; /* Optional: Adds rounded corners */
+    margin: 20px auto; /* Centers horizontally with 15px margin on top/bottom */
+    display: block; /* Ensures the margin auto works */
+}
+
+
+
+.product-details-content {
+    padding: 2rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-details-title {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Inter',Arial, Helvetica, sans-serif;
+}
+
+.product-details-price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    font-family: 'Inter',Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.product-details-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 400;
+    font-family: 'Inter',Arial, Helvetica, sans-serif;
+}
+
+.promo-code-container {
+    margin-bottom: 2rem;
+}
+
+.promo-code-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.promo-code {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--light-gray);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.share-section {
+    margin-bottom: 2rem;
+}
+
+.share-text {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+.error-message {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.error-message h2 {
+    color: var(--danger-color);
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.back-button:hover {
+    background: var(--secondary-color);
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+/* Copy Button Styles */
+.copy-btn {
+    background: #333;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #333;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.copy-btn i {
+    font-size: 10px;
+}
+
+.copy-btn:hover {
+    background: white;
+    color: #333;
+}
+
+.copy-btn[disabled] {
+    background: #999;
+    border-color: #999;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.copy-btn[disabled]:hover {
+    background: #999;
+    color: white;
+}
+
+/* Share Button Styles */
+.share-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.share-option {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    background: white;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #333;
+    padding: 0;
+}
+
+.share-option:hover {
+    color: var(--primary-color);
+}
+
+.share-option i {
+    font-size: 14px;
+}
+
+/* Copy Notification */
+.copy-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.copy-notification.show {
+    opacity: 1;
+}
+
+/* Buy Button */
+.buy-button {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50px;
+    transition: background 0.2s;
+    font-size: 16px;
+    font-weight: 550;
+    margin-top: auto;
+    border: none;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background: var(--secondary-color);
+}
+
+.buy-button.expired {
+    background: #999;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.buy-button.expired:hover {
+    background: #999;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .product-details {
+        flex-direction: column;
+    }
+
+    .product-details-header {
+        width: 100%;
+        min-width: unset;
+        height: 400px;
+    }
+
+    .product-details-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-details-header {
+        height: 300px;
+    }
+
+    .product-details-content {
+        padding: 1.5rem;
+    }
+
+
+
+    .product-details-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .share-buttons {
+        flex-wrap: wrap;
+    }
+} 
