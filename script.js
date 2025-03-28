@@ -599,7 +599,9 @@ function renderProducts(productsToRender) {
     document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
             const productId = card.dataset.productId;
-            window.location.href = `details.html?id=${productId}`;
+            const productTitle = card.querySelector('.product-title').textContent;
+            const encodedTitle = productTitle.replace(/\s+/g, '-');
+            window.location.href = `details.html?id=${productId}&item=${encodedTitle}`;
         });
     });
 }

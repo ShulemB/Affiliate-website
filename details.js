@@ -103,13 +103,20 @@ function shareOnPlatform(platform, url, title) {
 // Load product details
 async function loadProductDetails() {
     try {
-        // Get product ID from URL
+        // Get product ID and item from URL
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
+        const itemName = urlParams.get('item');
 
         if (!productId) {
             window.location.href = 'index.html';
             return;
+        }
+
+        // Update page title if item name is available
+        if (itemName) {
+            const decodedTitle = itemName.replace(/-/g, ' ');
+            document.title = `${decodedTitle} - Today's Deals`;
         }
 
         // Fetch data from Google Sheets
