@@ -525,7 +525,7 @@ function renderProducts(productsToRender) {
                 <div class="product-card ${isExpired ? 'expired' : ''}" data-product-id="${product.ID}">
                     <div class="card-header">
                         <div class="post-meta">
-                            ${product.company} ·<br> ${timeSincePosted}
+                            ${product.company} · ${timeSincePosted}
                         </div>
                         <img src="${product.picture}" alt="${product.item}" class="product-image">
                     </div>
@@ -571,9 +571,9 @@ function renderProducts(productsToRender) {
                                 </div>
                             </div>
                             <div class="deal-meta">
-                                <span class="time-remaining">
+                                <!--<span class="time-remaining">
                                     <i class="fas fa-clock"></i> ${timeRemaining}
-                                </span>
+                                </span>-->
                                 <span class="category">
                                     <i class="fas fa-tag"></i> ${product.category}
                                 </span>
