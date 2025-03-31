@@ -520,6 +520,10 @@ function renderProducts(productsToRender) {
             const originalPrice = formatPrice(product.fullPrice);
             const timeSincePosted = getTimeSince(product.dateEntered);
             const timeRemaining = getTimeRemaining(product.dateE);
+            const truncatedTitle = product.item.length > 52 
+            ? product.item.substring(0, 52) + '...' 
+            : (product.item.length < 40 ? product.item + '<br><br>' : product.item);
+
             
             return `
                 <div class="product-card ${isExpired ? 'expired' : ''}" data-product-id="${product.ID}">
@@ -530,7 +534,7 @@ function renderProducts(productsToRender) {
                         <img src="${product.picture}" alt="${product.item}" class="product-image">
                     </div>
                     <div class="product-info">
-                        <h2 class="product-title">${product.item}</h2>
+                        <h2 class="product-title">${truncatedTitle}</h2>
                         <div class="product-price">
                             <div class="price-line">
                                 <span class="current-price">${discountedPrice}</span>
@@ -599,8 +603,8 @@ function renderProducts(productsToRender) {
     document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
             const productId = card.dataset.productId;
-            const productTitle = card.querySelector('.product-title').textContent;
-            const encodedTitle = productTitle.replace(/\s+/g, '-');
+            const product = products.find(p => p.ID === productId);
+            const encodedTitle = product.item.replace(/\s+/g, '-');
             window.location.href = `details.html?id=${productId}&item=${encodedTitle}`;
         });
     });
