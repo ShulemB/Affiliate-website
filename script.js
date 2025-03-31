@@ -588,7 +588,7 @@ function renderProducts(productsToRender) {
                         ` : `
                             <button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">
 
-                            <button onclick="" class="buy-button">
+                            <!--<button onclick="" class="buy-button">-->
                             
                                 Get Deal
                             </button>
