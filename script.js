@@ -586,7 +586,7 @@ function renderProducts(productsToRender) {
                         ${isExpired ? `
                             <button class="buy-button expired" disabled>EXPIRED</button>
                         ` : `
-                            <!--<button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">-->
+                            <button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">
 
                             <button onclick="" class="buy-button">
                             
