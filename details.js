@@ -183,9 +183,9 @@ async function loadProductDetails() {
                             `<span class="discount-badge">${productData.discount}% OFF</span>` : ''}
                     </div>
                     <div class="product-details-meta">
-                        <span class="time-remaining">
+                       <!-- <span class="time-remaining">
                             <i class="fas fa-clock"></i> ${timeRemaining}
-                        </span>
+                        </span>-->
                         <span class="category">
                             <i class="fas fa-tag"></i> ${productData.category}
                         </span>

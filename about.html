@@ -5,57 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - DealFinder</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav class="top-nav">
-            <div class="logo">
-                <h1><a href="index.html">DealFinder</a></h1>
-            </div>
-        </nav>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="site-title-link">
+                <h1 class="site-title">TODAY'S DEALS</h1>
+            </a>
+        </div>
     </header>
 
-    <main>
-        <div class="page-container">
-            <h1>About DealFinder</h1>
+    <main class="about-page-main">
+        <section class="about-hero">
+            <div class="hero-content">
+                <h1>About DealFinder</h1>
+                <p class="hero-subtitle">Connecting you with the best deals online, every day.</p>
+            </div>
+        </section>
             
-            <section class="about-section">
-                <h2>Our Mission</h2>
-                <p>At DealFinder, we're passionate about helping you save money. Our mission is to bring you the best deals, discounts, and promotional offers from trusted retailers across the web.</p>
+        <div class="page-container about-content-container">
+            <section class="about-section about-mission">
+                <div class="about-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="about-text">
+                    <h2>Our Mission</h2>
+                    <p>At DealFinder, we're passionate about helping you save money. Our mission is simple: to bring you the best, most current deals, discounts, and promotional offers from trusted retailers across the web, all in one convenient place.</p>
+                </div>
             </section>
 
-            <section class="about-section">
-                <h2>What We Do</h2>
-                <p>We curate and verify deals from various sources to ensure you get:</p>
-                <ul>
-                    <li>Verified promotional codes</li>
-                    <li>Real-time price tracking</li>
-                    <li>Exclusive discounts</li>
-                    <li>Time-sensitive offers</li>
-                </ul>
+            <section class="about-section about-what-we-do">
+                <div class="about-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="about-text">
+                    <h2>What We Do</h2>
+                    <p>We relentlessly scan the digital marketplace, curating and verifying deals from countless sources. We focus on delivering:</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Verified promotional codes that actually work.</li>
+                        <li><i class="fas fa-chart-line"></i> Real-time price tracking to catch the best discounts.</li>
+                        <li><i class="fas fa-star"></i> Exclusive offers you won't find elsewhere.</li>
+                        <li><i class="fas fa-hourglass-half"></i> Time-sensitive deals so you never miss out.</li>
+                    </ul>
+                </div>
             </section>
 
-            <section class="about-section">
-                <h2>Our Values</h2>
+            <section class="about-values-section">
+                <h2>Our Core Values</h2>
                 <div class="values-grid">
                     <div class="value-card">
                         <i class="fas fa-check-circle"></i>
                         <h3>Reliability</h3>
-                        <p>We verify all deals before publishing</p>
+                        <p>Every deal is verified for accuracy and validity before it reaches you. We strive to be a source you can depend on.</p>
                     </div>
                     <div class="value-card">
                         <i class="fas fa-clock"></i>
                         <h3>Timeliness</h3>
-                        <p>Real-time updates on the latest offers</p>
+                        <p>Deals change fast. We provide real-time updates, ensuring you have access to the latest offers as soon as they appear.</p>
                     </div>
                     <div class="value-card">
                         <i class="fas fa-user-shield"></i>
                         <h3>Trust</h3>
-                        <p>Only deals from reputable sources</p>
+                        <p>We partner only with reputable retailers and prioritize transparency. Your trust is our most valuable asset.</p>
                     </div>
                 </div>
+            </section>
+
+            <section class="about-cta">
+                <h2>Ready to Start Saving?</h2>
+                <p>Explore today's top deals and experience the DealFinder difference.</p>
+                <a href="index.html" class="cta-button">Find Deals Now</a>
             </section>
         </div>
     </main>
@@ -84,7 +105,7 @@
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-section">
