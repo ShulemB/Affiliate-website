@@ -535,64 +535,66 @@ function renderProducts(productsToRender) {
                     </div>
                     <div class="product-info">
                         <h2 class="product-title">${truncatedTitle}</h2>
-                        <div class="product-price">
-                            <div class="price-line">
-                                <span class="current-price">${discountedPrice}</span>
-                                <span class="original-price">${originalPrice}</span>
-                            </div>
-                            <div class="price-actions">
-                                ${product.discount > 0 ? 
-                                `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
-                                ${product.promoCode ? `
-                                    <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
-                                        <i class="fas fa-copy"></i> COPY CODE
-                                    </button>
-                                ` : ''}
-                                <div class="share-container">
-                                    <button class="share-btn-main" onclick="event.stopPropagation(); toggleShareButtons(${index})">
-                                        <img src="Arrow.png" alt="Share" class="share-arrow">
-                                    </button>
-                                    <div class="share-buttons" id="share-buttons-${index}" style="display: none;">
-                                        <button onclick="event.stopPropagation(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
-                                            <i class="fas fa-link"></i>
+                        <div class="product-bottom-content">
+                            <div class="product-price">
+                                <div class="price-line">
+                                    <span class="current-price">${discountedPrice}</span>
+                                    <span class="original-price">${originalPrice}</span>
+                                </div>
+                                <div class="price-actions">
+                                    ${product.discount > 0 ? 
+                                    `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
+                                    ${product.promoCode ? `
+                                        <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
+                                            <i class="fas fa-copy"></i> COPY CODE
                                         </button>
-                                        <button onclick="event.stopPropagation(); shareOnPlatform('whatsapp', '${product.link}', '${product.item}')" class="share-option">
-                                            <i class="fab fa-whatsapp"></i>
+                                    ` : ''}
+                                    <div class="share-container">
+                                        <button class="share-btn-main" onclick="event.stopPropagation(); toggleShareButtons(${index})">
+                                            <img src="Arrow.png" alt="Share" class="share-arrow">
                                         </button>
-                                        <button onclick="event.stopPropagation(); shareOnPlatform('facebook', '${product.link}', '${product.item}')" class="share-option">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </button>
-                                        <button onclick="event.stopPropagation(); shareOnPlatform('email', '${product.link}', '${product.item}')" class="share-option">
-                                            <i class="fas fa-envelope"></i>
-                                        </button>
-                                        <button onclick="event.stopPropagation(); shareOnPlatform('twitter', '${product.link}', '${product.item}')" class="share-option">
-                                            <i class="fab fa-twitter"></i>
-                                        </button>
-                                        <button onclick="event.stopPropagation(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
-                                            <i class="fab fa-pinterest-p"></i>
-                                        </button>
+                                        <div class="share-buttons" id="share-buttons-${index}" style="display: none;">
+                                            <button onclick="event.stopPropagation(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
+                                                <i class="fas fa-link"></i>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); shareOnPlatform('whatsapp', '${product.link}', '${product.item}')" class="share-option">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); shareOnPlatform('facebook', '${product.link}', '${product.item}')" class="share-option">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); shareOnPlatform('email', '${product.link}', '${product.item}')" class="share-option">
+                                                <i class="fas fa-envelope"></i>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); shareOnPlatform('twitter', '${product.link}', '${product.item}')" class="share-option">
+                                                <i class="fab fa-twitter"></i>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
+                                                <i class="fab fa-pinterest-p"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="deal-meta">
+                                    <!--<span class="time-remaining">
+                                        <i class="fas fa-clock"></i> ${timeRemaining}
+                                    </span>-->
+                                    <span class="category">
+                                        <i class="fas fa-tag"></i> ${product.category}
+                                    </span>
+                                </div>
                             </div>
-                            <div class="deal-meta">
-                                <!--<span class="time-remaining">
-                                    <i class="fas fa-clock"></i> ${timeRemaining}
-                                </span>-->
-                                <span class="category">
-                                    <i class="fas fa-tag"></i> ${product.category}
-                                </span>
-                            </div>
-                        </div>
-                        ${isExpired ? `
-                            <button class="buy-button expired" disabled>EXPIRED</button>
-                        ` : `
-                            <!--<button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">-->
+                            ${isExpired ? `
+                                <button class="buy-button expired" disabled>EXPIRED</button>
+                            ` : `
+                                <!--<button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">-->
 
-                            <button onclick="" class="buy-button">
-                            
-                                Get Deal
-                            </button>
-                        `}
+                                <button onclick="" class="buy-button">
+                                
+                                    Get Deal
+                                </button>
+                            `}
+                        </div>
                     </div>
                 </div>
             `;

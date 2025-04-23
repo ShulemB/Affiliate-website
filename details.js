@@ -162,75 +162,76 @@ async function loadProductDetails() {
 
         // Render product details
         productDetailsContainer.innerHTML = `
-            <div class="product-details ${isExpired ? 'expired' : ''}">
-                <div class="product-details-header">
-                    <div class="product-meta">
-                        <span class="company">${productData.company}</span>
-                        <span class="time-posted">${timeSincePosted}</span>
+            <div class="product-details-layout">
+                <div class="product-image-column">
+                    <div class="product-meta-details">
+                        <span class="company"><i class="fas fa-store"></i> ${productData.company}</span>
+                        <span class="time-posted"><i class="fas fa-history"></i> ${timeSincePosted}</span>
                     </div>
-                    <div class="product-image-container">
+                    <div class="image-wrapper">
                         <img src="${productData.picture}" alt="${productData.item}" class="product-details-image">
                     </div>
                 </div>
-                <div class="product-details-content">
+                <div class="product-info-column">
                     <h1 class="product-details-title">${productData.item}</h1>
-                    <div class="product-details-price">
-                        <div class="price-line">
-                            <span class="current-price">${discountedPrice}</span>
-                            <span class="original-price">${originalPrice}</span>
-                        </div>
+                    
+                    <div class="price-section">
+                        <span class="current-price">${discountedPrice}</span>
+                        ${productData.fullPrice > productData.discountPrice ? 
+                            `<span class="original-price">${originalPrice}</span>` : ''}
                         ${productData.discount > 0 ? 
-                            `<span class="discount-badge">${productData.discount}% OFF</span>` : ''}
+                            `<span class="discount-badge-details">${productData.discount}% OFF</span>` : ''}
                     </div>
-                    <div class="product-details-meta">
-                       <!-- <span class="time-remaining">
-                            <i class="fas fa-clock"></i> ${timeRemaining}
-                        </span>-->
-                        <span class="category">
-                            <i class="fas fa-tag"></i> ${productData.category}
-                        </span>
+
+                    <div class="category-section">
+                        <span class="category"><i class="fas fa-tag"></i> ${productData.category}</span>
                     </div>
+
                     ${productData.promoCode ? `
-                        <div class="promo-code-container">
-                            <span class="promo-code-label">Promo Code:</span>
-                            <div class="promo-code">
-                                <span>${productData.promoCode}</span>
-                                <button class="copy-btn" onclick="copyToClipboard('${productData.promoCode}')" ${isExpired ? 'disabled' : ''}>
-                                    <i class="fas fa-copy"></i> COPY CODE
+                        <div class="promo-code-section">
+                            <span class="section-label">Promo Code:</span>
+                            <div class="promo-code-box">
+                                <span class="promo-code-text">${productData.promoCode}</span>
+                                <button class="copy-promo-btn" onclick="copyToClipboard('${productData.promoCode}')" ${isExpired ? 'disabled' : ''}>
+                                    <i class="fas fa-copy"></i> COPY
                                 </button>
                             </div>
                         </div>
                     ` : ''}
-                    <div class="share-section">
-                        <span class="share-text">Share this deal:</span>
-                        <div class="share-buttons">
-                            <button onclick="shareOnPlatform('copy', '${productData.link}', '${productData.item}')" class="share-option">
+
+                    <div class="actions-section">
+                        ${isExpired ? `
+                            <button class="get-deal-btn expired" disabled>DEAL EXPIRED</button>
+                        ` : `
+                            <a href="${productData.link}" target="_blank" class="get-deal-btn">
+                                <i class="fas fa-shopping-cart"></i> Get Deal
+                            </a>
+                        `}
+                    </div>
+
+                    <div class="share-section-details">
+                        <span class="section-label">Share This Deal:</span>
+                        <div class="share-buttons-details">
+                            <button onclick="shareOnPlatform('copy', window.location.href, '${productData.item}')" class="share-option-details" title="Copy Link">
                                 <i class="fas fa-link"></i>
                             </button>
-                            <button onclick="shareOnPlatform('whatsapp', '${productData.link}', '${productData.item}')" class="share-option">
+                            <button onclick="shareOnPlatform('whatsapp', window.location.href, '${productData.item}')" class="share-option-details" title="Share on WhatsApp">
                                 <i class="fab fa-whatsapp"></i>
                             </button>
-                            <button onclick="shareOnPlatform('facebook', '${productData.link}', '${productData.item}')" class="share-option">
+                            <button onclick="shareOnPlatform('facebook', window.location.href, '${productData.item}')" class="share-option-details" title="Share on Facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </button>
-                            <button onclick="shareOnPlatform('email', '${productData.link}', '${productData.item}')" class="share-option">
+                            <button onclick="shareOnPlatform('email', window.location.href, '${productData.item}')" class="share-option-details" title="Share via Email">
                                 <i class="fas fa-envelope"></i>
                             </button>
-                            <button onclick="shareOnPlatform('twitter', '${productData.link}', '${productData.item}')" class="share-option">
+                            <button onclick="shareOnPlatform('twitter', window.location.href, '${productData.item}')" class="share-option-details" title="Share on Twitter">
                                 <i class="fab fa-twitter"></i>
                             </button>
-                            <button onclick="shareOnPlatform('pinterest', '${productData.link}', '${productData.item}')" class="share-option">
+                            <button onclick="shareOnPlatform('pinterest', window.location.href, '${productData.item}')" class="share-option-details" title="Pin on Pinterest">
                                 <i class="fab fa-pinterest-p"></i>
                             </button>
                         </div>
                     </div>
-                    ${isExpired ? `
-                        <button class="buy-button expired" disabled>EXPIRED</button>
-                    ` : `
-                        <a href="${productData.link}" target="_blank" class="buy-button">
-                            Get Deal
-                        </a>
-                    `}
                 </div>
             </div>
         `;

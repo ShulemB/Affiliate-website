@@ -289,7 +289,7 @@ body {
 .card-header {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 175px;
     overflow: hidden;
 }
 
@@ -312,11 +312,12 @@ body {
     background: white;
     display: block; /* Ensures it behaves properly in a flex or grid container */
     margin: 0 auto; /* Centers horizontally */
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .product-info {
     padding: 0.85rem;
+    padding-top: 0.1rem;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -326,17 +327,22 @@ body {
     font-size: 16px;
     font-weight: 550;
     font-family: 'Inter',Arial, Helvetica, sans-serif;
-    margin-bottom: 0.5rem;
     color: var(--text-color);
     line-height: 1.4;
+}
+
+.product-bottom-content {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .product-price {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    margin: 0rem;
-    margin-top: auto;
+    margin: 0;
 }
 
 .price-line {
@@ -369,9 +375,9 @@ body {
 
 .discount-badge {
     background: var(--danger-color);
+    border-radius: 4px;
     color: white;
     padding: 0.37rem 0.4rem;
-    border-radius: 0px;
     font-weight: 600;
     font-size: 10PX;
     
@@ -379,7 +385,7 @@ body {
 }
 
 .deal-meta {
-    margin: 0.5rem 0;
+    margin: 0.1rem 0;
     padding: 0.35rem 0.4rem;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -387,9 +393,8 @@ body {
 }
 
 .promo-code {
-    
     padding: 0.5rem;
-    border-radius: 0px;
+    border-radius: 4px;
     font-family: monospace;
     margin-bottom: 0.5rem;
     font-size: 10px;
@@ -404,7 +409,7 @@ body {
     background: #333;
     color: white;
     padding: 0.3rem 0.4rem;
-    border-radius: 0px;
+    border-radius: 4px;
     font-size: 10px;
     font-weight: 600;
     cursor: pointer;
@@ -455,7 +460,6 @@ body {
     transition: background 0.2s;
     font-size: 16px;
     font-weight: 550;
-    margin-top: auto;
     border: none;
     cursor: pointer;
     align-self: center;
@@ -505,7 +509,7 @@ footer {
     padding: 3rem 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12rem;
+    gap: 6rem;
 }
 
 .footer-section h3 {
@@ -1255,7 +1259,6 @@ body {
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 8px;
-    
     display: block;
     text-transform: uppercase;
 }
