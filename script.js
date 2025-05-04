@@ -30,7 +30,7 @@ let currentCategory = 'All';
 let currentSort = 'recent';
 let categories = new Set(['All']);
 let currentPage = 1;
-const dealsPerPage = 10;
+const dealsPerPage = 2;
 let totalPages = 1;
 
 // Format time since posting
@@ -256,13 +256,31 @@ function createPaginationControls() {
     
     let paginationHTML = '';
     
-    // Previous button
-    paginationHTML += `<button class="page-btn prev ${currentPage === 1 ? 'disabled' : ''}" ${currentPage === 1 ? 'disabled' : ''}>
-        <i class="fas fa-chevron-left"></i>
-    </button>`;
+    // --- SEO-Friendly Pagination Links --- 
+    
+    // Previous page link
+    const prevPageUrl = new URL(window.location);
+    if (currentPage > 1) {
+        prevPageUrl.searchParams.set('page', (currentPage - 1).toString());
+        paginationHTML += `<a href="${prevPageUrl.toString()}" class="page-btn prev" rel="prev">
+            <i class="fas fa-chevron-left"></i>
+        </a>`;
+    } else {
+        // Still use a span for disabled state, but styled like a button
+        paginationHTML += `<span class="page-btn prev disabled">
+            <i class="fas fa-chevron-left"></i>
+        </span>`;
+    }
 
-    // First page
-    paginationHTML += `<button class="page-btn ${currentPage === 1 ? 'active' : ''}" data-page="1">1</button>`;
+    // Function to create page link URLs
+    const createPageUrl = (pageNumber) => {
+        const url = new URL(window.location);
+        url.searchParams.set('page', pageNumber.toString());
+        return url.toString();
+    };
+
+    // First page link (always a link)
+    paginationHTML += `<a href="${createPageUrl(1)}" class="page-btn ${currentPage === 1 ? 'active' : ''}" ${currentPage === 1 ? 'aria-current="page"' : ''}>1</a>`;
 
     // Ellipsis and middle pages
     if (totalPages > 1) {
@@ -270,42 +288,66 @@ function createPaginationControls() {
             paginationHTML += '<span class="ellipsis">...</span>';
         }
 
-        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
-            paginationHTML += `<button class="page-btn ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        // Determine range of links to show around current page
+        let startPage = Math.max(2, currentPage - 1);
+        let endPage = Math.min(totalPages - 1, currentPage + 1);
+
+        for (let i = startPage; i <= endPage; i++) {
+            // Add rel attributes for pages adjacent to current
+            let relAttr = '';
+            if (i === currentPage - 1) relAttr = ' rel="prev"';
+            if (i === currentPage + 1) relAttr = ' rel="next"';
+            
+            paginationHTML += `<a href="${createPageUrl(i)}" class="page-btn ${currentPage === i ? 'active' : ''}" ${currentPage === i ? 'aria-current="page"' : ''}${relAttr}>${i}</a>`;
         }
 
         if (currentPage < totalPages - 2) {
             paginationHTML += '<span class="ellipsis">...</span>';
         }
 
-        // Last page
+        // Last page link (always a link, except if it's page 1)
         if (totalPages > 1) {
-            paginationHTML += `<button class="page-btn ${currentPage === totalPages ? 'active' : ''}" data-page="${totalPages}">${totalPages}</button>`;
+            paginationHTML += `<a href="${createPageUrl(totalPages)}" class="page-btn ${currentPage === totalPages ? 'active' : ''}" ${currentPage === totalPages ? 'aria-current="page"' : ''} ${currentPage < totalPages ? 'rel="next"' : ''}>${totalPages}</a>`;
         }
     }
 
-    // Next button
-    paginationHTML += `<button class="page-btn next ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage === totalPages ? 'disabled' : ''}>
-        <i class="fas fa-chevron-right"></i>
-    </button>`;
+    // Next page link
+    const nextPageUrl = new URL(window.location);
+    if (currentPage < totalPages) {
+        nextPageUrl.searchParams.set('page', (currentPage + 1).toString());
+        paginationHTML += `<a href="${nextPageUrl.toString()}" class="page-btn next" rel="next">
+            <i class="fas fa-chevron-right"></i>
+        </a>`;
+    } else {
+        // Disabled state span
+        paginationHTML += `<span class="page-btn next disabled">
+            <i class="fas fa-chevron-right"></i>
+        </span>`;
+    }
+    // --- End SEO-Friendly Links ---
 
     paginationContainer.innerHTML = paginationHTML;
 
-    // Add event listeners to pagination buttons
-    paginationContainer.querySelectorAll('.page-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            if (button.classList.contains('disabled')) return;
+    // Add event listeners ONLY to pagination links (<a> tags)
+    paginationContainer.querySelectorAll('a.page-btn').forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Prevent default link navigation
+            e.preventDefault(); 
+            
+            // Don't do anything if clicking the active page link
+            if (link.classList.contains('active')) return; 
 
-            if (button.classList.contains('prev')) {
-                currentPage = Math.max(1, currentPage - 1);
-            } else if (button.classList.contains('next')) {
-                currentPage = Math.min(totalPages, currentPage + 1);
-            } else {
-                currentPage = parseInt(button.dataset.page);
+            const url = new URL(link.href);
+            const pageParam = url.searchParams.get('page');
+            
+            if (pageParam) {
+                currentPage = parseInt(pageParam);
+                filterAndSortProducts(); // Refilter/render products for the new page
+                window.scrollTo(0, 0); // Scroll to top
+                
+                // Update URL in browser history without full page reload
+                window.history.pushState({ path: url.toString() }, '', url.toString());
             }
-
-            filterAndSortProducts();
-            window.scrollTo(0, 0);
         });
     });
 }
@@ -772,14 +814,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Initialize pages
+// Update the initialize page function to handle URL params
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if there's a category in the URL
     const url = new URL(window.location);
+    
     const categoryParam = url.searchParams.get('category');
     if (categoryParam) {
         currentCategory = categoryParam;
     }
     
+    // Read page number from URL on initial load
+    const pageParam = url.searchParams.get('page');
+    currentPage = pageParam ? parseInt(pageParam) : 1;
+    
     fetchProducts();
+    
+    // Listen for browser back/forward navigation
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.path) {
+            const popUrl = new URL(event.state.path);
+            const popPageParam = popUrl.searchParams.get('page');
+            const popCategoryParam = popUrl.searchParams.get('category');
+            
+            currentPage = popPageParam ? parseInt(popPageParam) : 1;
+            currentCategory = popCategoryParam || 'All'; 
+            
+            // Update UI state without fetching again if only page changed
+            // Or re-fetch if category changed or needed
+            filterAndSortProducts(); 
+        } else {
+            // Handle cases where state might be null (e.g., initial load)
+            const currentUrl = new URL(window.location);
+            const page = currentUrl.searchParams.get('page');
+            const category = currentUrl.searchParams.get('category');
+            currentPage = page ? parseInt(page) : 1;
+            currentCategory = category || 'All';
+            filterAndSortProducts();
+        }
+    });
 }); 
