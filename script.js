@@ -30,7 +30,7 @@ let currentCategory = 'All';
 let currentSort = 'recent';
 let categories = new Set(['All']);
 let currentPage = 1;
-const dealsPerPage = 2;
+const dealsPerPage = 10;
 let totalPages = 1;
 
 // Format time since posting
