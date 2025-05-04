@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post - Daily Deals</title>
+    <title>Blog Post - DealFinder</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,57 +11,60 @@
 <body>
     <header class="main-header">
         <div class="header-container">
-            <div class="logo">
-                <a href="index.html" class="site-title">Daily Deals</a>
-            </div>
-            <nav class="main-nav">
-                <a href="index.html">Deals</a>
-                <a href="blog.html">Blog</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+            <a href="index.html" class="site-title-link">
+                <h1 class="site-title">TODAY'S DEALS</h1>
+            </a>
         </div>
     </header>
 
-    <main class="blog-post-container">
-        <article class="blog-post">
-            <div class="blog-post-header">
-                <h1 id="postTitle">Blog Post Title</h1>
-                <div class="post-meta">
-                    <span class="post-date" id="postDate">January 1, 2024</span>
-                    <span class="post-author" id="postAuthor">By John Doe</span>
+    <main class="blog-post-page-main">
+        <div class="page-container blog-post-container-narrow">
+            <article class="blog-post-article">
+                <div class="blog-post-header">
                     <span class="post-category" id="postCategory">Category</span>
-                </div>
-            </div>
-
-            <div class="blog-post-image">
-                <img id="postImage" src="" alt="Blog Post Image">
-            </div>
-
-            <div class="blog-post-content" id="postContent">
-                <!-- Blog post content will be dynamically inserted here -->
-            </div>
-
-            <div class="blog-post-footer">
-                <div class="share-section">
-                    <span>Share this article:</span>
-                    <div class="social-share">
-                        <button onclick="shareOnPlatform('facebook', window.location.href, document.title)" class="share-option">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-                        <button onclick="shareOnPlatform('twitter', window.location.href, document.title)" class="share-option">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-                        <button onclick="shareOnPlatform('linkedin', window.location.href, document.title)" class="share-option">
-                            <i class="fab fa-linkedin-in"></i>
-                        </button>
-                        <button onclick="shareOnPlatform('copy', window.location.href, document.title)" class="share-option">
-                            <i class="fas fa-link"></i>
-                        </button>
+                    <h1 id="postTitle">Blog Post Title Loading...</h1>
+                    <div class="post-meta-details">
+                        <span class="post-author" id="postAuthor"><i class="fas fa-user"></i> By John Doe</span>
+                        <span class="post-date" id="postDate"><i class="fas fa-calendar-alt"></i> January 1, 2024</span>
                     </div>
                 </div>
+
+                <div class="blog-post-image-container">
+                    <img id="postImage" src="" alt="Blog Post Image" class="featured-image">
+                </div>
+
+                <div class="blog-post-content" id="postContent">
+                    <p class="loading">Loading content...</p>
+                </div>
+
+                <div class="blog-post-footer">
+                    <div class="share-section-details">
+                        <span class="section-label">Share This Article:</span>
+                        <div class="share-buttons-details">
+                            <button onclick="shareOnPlatform('copy', window.location.href, document.title)" class="share-option-details" title="Copy Link">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button onclick="shareOnPlatform('whatsapp', window.location.href, document.title)" class="share-option-details" title="Share on WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                            <button onclick="shareOnPlatform('facebook', window.location.href, document.title)" class="share-option-details" title="Share on Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button onclick="shareOnPlatform('email', window.location.href, document.title)" class="share-option-details" title="Share via Email">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                            <button onclick="shareOnPlatform('twitter', window.location.href, document.title)" class="share-option-details" title="Share on Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="back-to-blog">
+                <a href="blog.html"><i class="fas fa-arrow-left"></i> Back to Blog</a>
             </div>
-        </article>
+        </div>
     </main>
 
     <footer>

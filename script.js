@@ -155,7 +155,6 @@ function initializeDropdowns() {
     // More Filters dropdown
     const moreFiltersDropdown = document.querySelector('.filter-dropdown:nth-child(2)');
     if (moreFiltersDropdown) {
-        // Create dropdown content if it doesn't exist
         let dropdownContent = moreFiltersDropdown.querySelector('.dropdown-content');
         if (!dropdownContent) {
             dropdownContent = document.createElement('div');
@@ -163,66 +162,69 @@ function initializeDropdowns() {
             moreFiltersDropdown.appendChild(dropdownContent);
         }
 
-        // Update button text
         const buttonText = moreFiltersDropdown.querySelector('.button-text') || document.createElement('span');
         buttonText.className = 'button-text';
-        buttonText.textContent = 'Category: ' + currentCategory;
+        // Set initial text based on currentCategory state (default to 'Categories')
+        buttonText.textContent = (currentCategory === 'All') ? 'Categories' : `Categories ${currentCategory}`;
         if (!moreFiltersDropdown.querySelector('.button-text')) {
             moreFiltersDropdown.insertBefore(buttonText, moreFiltersDropdown.querySelector('i'));
         }
 
-        // Update categories in dropdown
         function updateCategoryDropdown() {
-            const categories = getDistinctCategories(products);
-            dropdownContent.innerHTML = categories.map(category => `
-                <div class="dropdown-item ${category === currentCategory ? 'active' : ''}" data-category="${category}">
-                    ${category}
-                    ${category === currentCategory ? '<i class="fas fa-check"></i>' : ''}
+            const categoryOptions = getDistinctCategories(products);
+            // Map categories, treating 'All' internally but displaying as 'Categories' if it's the current one
+            dropdownContent.innerHTML = categoryOptions.map(category => {
+                const displayCategory = (category === 'All' && currentCategory === 'All') ? 'All Categories' : category;
+                const isActive = category === currentCategory;
+                return `
+                <div class="dropdown-item ${isActive ? 'active' : ''}" data-category="${category}">
+                    ${displayCategory}
+                    ${isActive ? '<i class="fas fa-check"></i>' : ''}
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
-        // Toggle dropdown visibility
         moreFiltersDropdown.addEventListener('click', (e) => {
             if (!e.target.closest('.dropdown-item')) {
                 const wasActive = moreFiltersDropdown.classList.contains('active');
-                // Close all dropdowns first
                 document.querySelectorAll('.filter-dropdown').forEach(dropdown => {
                     dropdown.classList.remove('active');
-                    dropdown.querySelector('.dropdown-content').style.display = 'none';
+                    const content = dropdown.querySelector('.dropdown-content');
+                    if(content) content.style.display = 'none';
                 });
                 if (!wasActive) {
-                    updateCategoryDropdown(); // Update categories before showing
+                    updateCategoryDropdown(); 
                     moreFiltersDropdown.classList.add('active');
                     dropdownContent.style.display = 'block';
                 }
             }
         });
 
-        // Handle category selection
         dropdownContent.addEventListener('click', (e) => {
             const item = e.target.closest('.dropdown-item');
             if (item) {
                 const selectedCategory = item.dataset.category;
-                currentCategory = selectedCategory;
+                currentCategory = selectedCategory; // Update state
                 
-                // Update dropdown items
-                dropdownContent.querySelectorAll('.dropdown-item').forEach(dropItem => {
-                    dropItem.classList.remove('active');
-                    dropItem.querySelector('i')?.remove();
-                });
-                item.classList.add('active');
-                item.innerHTML = `${selectedCategory} <i class="fas fa-check"></i>`;
-                
-                // Update button text
-                buttonText.textContent = 'Category: ' + selectedCategory;
+                // Update button text: Show 'Categories' if 'All' is selected, else 'Category: [Name]'
+                buttonText.textContent = (selectedCategory === 'All') ? 'Categories' : `Category: ${selectedCategory}`;
 
-                // Update filter buttons
+                // Update URL with the selected category
+                const url = new URL(window.location);
+                if (selectedCategory === 'All') {
+                    url.searchParams.delete('category');
+                } else {
+                    url.searchParams.set('category', selectedCategory);
+                }
+                window.history.pushState({}, '', url);
+
+                // Update active state in filter bar (if exists)
                 document.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.classList.toggle('active', btn.textContent === selectedCategory);
                 });
 
-                filterAndSortProducts();
+                filterAndSortProducts(); // Refilter products
                 moreFiltersDropdown.classList.remove('active');
                 dropdownContent.style.display = 'none';
             }
@@ -584,14 +586,14 @@ function renderProducts(productsToRender) {
                                     </span>
                                 </div>
                             </div>
-                            ${isExpired ? `
+                           ${isExpired ? `
                                 <button class="buy-button expired" disabled>EXPIRED</button>
                             ` : `
-                                <!--<button onclick="event.stopPropagation(); window.open('${product.link}', '_blank')" class="buy-button">-->
+                                
 
                                 <button onclick="" class="buy-button">
                                 
-                                    Get Deal
+                                    VIEW DETAILS
                                 </button>
                             `}
                         </div>
@@ -772,5 +774,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Initialize pages
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if there's a category in the URL
+    const url = new URL(window.location);
+    const categoryParam = url.searchParams.get('category');
+    if (categoryParam) {
+        currentCategory = categoryParam;
+    }
+    
     fetchProducts();
 }); 

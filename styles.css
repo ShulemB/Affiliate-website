@@ -21,28 +21,164 @@ body {
     /*line-height: 1.6;*/
 }
 
-/* Header Styles */
+/* Modern Header Styling */
 .main-header {
-    background-color: #ffffff;
-    padding: 20px 0;
-    border-bottom: 1px solid #eaeaea;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    padding: 1.2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 0.8rem;
+}
+
+.brand-icon {
+    font-size: 1.8rem;
+    color: #3d84a8;
 }
 
 .site-title {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #000000;
+    color: #2c3e50;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.search-container {
+    position: relative;
+    min-width: 500px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 1rem;
+    border: 1px solid #e1e5e9;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(61, 132, 168, 0.3);
+    border-color: #3d84a8;
+}
+
+.search-input::placeholder {
+    color: #adb5bd;
+}
+
+.filter-container {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.filter-dropdown {
+    background-color: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
     white-space: nowrap;
+    color: #495057;
+}
+
+.filter-dropdown:hover {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+}
+
+.filter-dropdown i {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.filter-dropdown i:first-child {
+    color: #3d84a8;
+    font-size: 1rem;
+}
+
+.button-text {
+    font-weight: 500;
+}
+
+/* Make the header responsive */
+@media (max-width: 992px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .header-controls {
+        width: 100%;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .search-container {
+        width: 100%;
+        min-width: 0;
+    }
+    
+    .filter-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .filter-dropdown {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-container {
+        flex-direction: column;
+    }
+    
+    .filter-dropdown {
+        width: 100%;
+    }
+    
+    .site-title {
+        font-size: 1.3rem;
+    }
 }
 
 /* Search container styles */
@@ -295,12 +431,14 @@ body {
 
 .post-meta {
     position: absolute;
+    margin-left: 10px;
+    margin-top: 3px;
     top: 3px;
     left: 3px;
     background: rgba(255, 255, 255, 0.9);
     padding: 3px 5px;
     border-radius: 4px;
-    font-size: 5px;
+    font-size: 10px;
     color: var(--text-color);
     z-index: 1;
 }
@@ -449,20 +587,20 @@ body {
 }
 
 .buy-button {
-    display: block;
+    display: none; /* Hide the button completely */
     width: 95%;
-    padding: 10px 2px;
+    padding: 0.6rem 0.5rem;
     background: var(--primary-color);
     color: white;
     text-decoration: none;
     text-align: center;
-    border-radius: 50px;
-    transition: background 0.2s;
-    font-size: 16px;
-    font-weight: 550;
+    border-radius: 6px; 
+    transition: background-color 0.2s, transform 0.1s ease-out;
+    font-size: 0.9rem;
+    font-weight: 600; 
     border: none;
     cursor: pointer;
-    align-self: center;
+    align-self: center; /* Keep align-self if needed for parent flex context */
 }
 
 .buy-button:hover {
@@ -1334,89 +1472,106 @@ body {
     }
 }
 
-/* Blog Styles */
-.blog-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+/* === Blog Page Styles === */
+
+/* Blog Listing Page (blog.html) */
+.blog-page-main {
+    background-color: var(--white-color); /* White background for content area */
+    padding-bottom: 3rem;
 }
 
-.blog-header {
+.blog-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('blog-hero-background.jpg'); /* Optional: Add a relevant hero image */
+    background-size: cover;
+    background-position: center;
+    color: var(--white-color);
     text-align: center;
+    padding: 3.5rem 1rem;
     margin-bottom: 3rem;
-    font-family: "Anton", sans-serif;
-    font-size: 60px;
-    font-weight: 400;
 }
 
-.blog-header h1 {
-    font-family: "Anton", sans-serif;
-    font-size: 60px;
-    font-weight: 400;
+.blog-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
-.blog-header p {
-    color: #666;
-    font-size: 1.1rem;
-    font-family: "Anton", sans-serif;
+.blog-list-container {
+    max-width: 1200px; /* Consistent max-width */
 }
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
     gap: 2rem;
     margin-bottom: 3rem;
 }
 
 .blog-card {
-    background: white;
-    border-radius: 8px;
+    background: var(--white-color);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .blog-card-image {
     width: 100%;
-    height: 200px;
+    height: 200px; /* Slightly reduced height */
     overflow: hidden;
+    position: relative; /* Needed for potential overlay later */
+    background-color: var(--light-gray); /* Background for loading/missing images */
 }
 
 .blog-card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    object-fit: contain; /* Change from cover to contain */
+    display: block; 
+    transition: transform 0.4s ease;
 }
 
 .blog-card:hover .blog-card-image img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .blog-card-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow content to grow */
 }
 
 .blog-card-meta {
     display: flex;
     gap: 1rem;
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: var(--dark-gray);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blog-card-meta span i {
+    margin-right: 0.3rem;
+    color: var(--primary-color);
 }
 
 .blog-card-title {
-    font-size: 1.25rem;
+    font-size: 1.25rem; 
     color: var(--text-color);
     margin-bottom: 0.75rem;
     line-height: 1.4;
     font-weight: 600;
+    flex-grow: 1; /* Allow title to push link down */
 }
 
 .blog-card-title a {
@@ -1430,83 +1585,127 @@ body {
 }
 
 .blog-card-excerpt {
-    color: #666;
+    color: var(--dark-gray);
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    /* Optional: Limit excerpt lines */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden; */
 }
 
 .blog-card-link {
     color: var(--primary-color);
     text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 600;
+    font-size: 0.9rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    margin-top: auto; /* Push to bottom */
+    align-self: flex-start; /* Align left */
+    transition: color 0.2s ease;
+}
+
+.blog-card-link i {
+    transition: transform 0.2s ease;
 }
 
 .blog-card-link:hover {
-    text-decoration: underline;
+    color: var(--secondary-color);
 }
 
-/* Blog Post Styles */
-.blog-post-container {
+.blog-card-link:hover i {
+    transform: translateX(3px);
+}
+
+/* Use general pagination styles, add specific class if needed */
+.blog-pagination {
+     margin-top: 1rem;
+}
+
+/* Blog Post Page (blog-post.html) */
+.blog-post-page-main {
+    background-color: var(--white-color);
+    padding: 2rem 0 4rem; /* Add padding */
+}
+
+.blog-post-container-narrow { /* Use this for centering content */
     max-width: 800px;
-    margin: 3rem auto;
-    padding: 0 1rem;
-    font-family: "Anton", sans-serif;
-    font-size: 60px;
-    font-weight: 400;
+    margin: 0 auto;
 }
 
-.blog-post {
-    background: white;
+.blog-post-article {
+    background: var(--white-color); /* Keep white or use light gray */
     border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    /* Removed padding/shadow - apply to container or sections */
 }
 
 .blog-post-header {
     margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.blog-post-header .post-category {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .blog-post-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.6rem; /* Larger post title */
     color: var(--text-color);
     margin-bottom: 1rem;
     line-height: 1.3;
+    font-weight: 700;
 }
 
-.post-meta {
+.blog-post-header .post-meta-details {
     display: flex;
-    gap: 1.0rem;
-    color: #666;
-    font-size: 10px;
-    margin-left: 5px;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem; /* Row and column gap */
+    color: var(--dark-gray);
+    font-size: 0.9rem;
 }
 
-.blog-post-image {
-    margin: 2rem 2rem 2rem;
-    width: 90%;
-    height: 90%;
-    object-fit: cover;
-    align-self: center;
+.blog-post-header .post-meta-details span {
+    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.4rem;
 }
 
-.blog-post-image img {
+.blog-post-header .post-meta-details i {
+    color: var(--secondary-color);
+}
+
+.blog-post-image-container {
+    margin: 2.5rem 0;
+}
+
+.featured-image {
     width: 100%;
     height: auto;
-    max-height: 500px;
-    object-fit: cover;
+    max-height: 550px;
+    object-fit: contain; /* Change from cover to contain */
+    border-radius: 8px;
+    display: block; 
+    margin: 0 auto; /* Center if container is wider */
 }
 
 .blog-post-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
+    font-size: 1.1rem; /* Comfortable reading size */
+    line-height: 1.8; /* Generous line height */
+    color: var(--text-color);
 }
 
 .blog-post-content p {
@@ -1515,14 +1714,54 @@ body {
 
 .blog-post-content h2 {
     font-size: 1.8rem;
-    margin: 2rem 0 1rem;
-    color: var(--text-color);
+    margin: 2.5rem 0 1.2rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    line-height: 1.4;
 }
 
 .blog-post-content h3 {
     font-size: 1.4rem;
-    margin: 1.5rem 0 1rem;
+    margin: 2rem 0 1rem;
     color: var(--text-color);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.blog-post-content a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.blog-post-content a:hover {
+    color: var(--secondary-color);
+}
+
+.blog-post-content ul, .blog-post-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2.5rem;
+}
+
+.blog-post-content li {
+    margin-bottom: 0.5rem;
+}
+
+.blog-post-content blockquote {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    background-color: var(--light-gray);
+    font-style: italic;
+    color: var(--dark-gray);
+}
+
+.blog-post-content img {
+     max-width: 100%;
+     height: auto;
+     border-radius: 6px;
+     margin: 1.5rem 0;
 }
 
 .blog-post-footer {
@@ -1531,314 +1770,78 @@ body {
     border-top: 1px solid var(--border-color);
 }
 
-.share-section {
+/* Use share styles from details.css */
+.share-section-details {
+    margin-top: 2rem; /* Add some top margin */
+    margin-bottom: 0; 
+    padding-top: 1.5rem; /* Add padding above */
+    border-top: 1px solid var(--border-color); /* Add separator */
+}
+
+.share-section-details .section-label {
+    display: block;
+    font-size: 0.9rem; /* Keep label size reasonable */
+    color: var(--dark-gray); /* Use dark gray */
+    font-weight: 500; /* Slightly less bold */
+    margin-bottom: 0.75rem;
+    text-transform: none; /* Remove uppercase */
+    letter-spacing: normal; /* Remove letter spacing */
+}
+
+.share-buttons-details {
     display: flex;
+    gap: 0.75rem; /* Slightly increased gap */
+    flex-wrap: wrap; 
+}
+
+.back-to-blog {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.back-to-blog a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    transition: all 0.2s ease;
 }
 
-.share-section span {
-    color: #666;
-    font-size: 0.95rem;
+.back-to-blog a:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
 }
 
-.social-share {
-    display: flex;
-    gap: 0.75rem;
-}
 
 /* Responsive Blog Styles */
-@media (max-width: 1024px) {
-    .blog-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 768px) {
-    .blog-header h1 {
-        font-size: 2rem;
+    .blog-hero h1 {
+        font-size: 2.2rem;
     }
 
     .blog-post-header h1 {
         font-size: 2rem;
     }
-}
-
-@media (max-width: 640px) {
-    .blog-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .blog-card-image {
-        height: 180px;
-    }
-
-    .post-meta {
-        flex-direction: column;
-        gap: 0.2rem;
+    
+    .blog-post-content {
+        font-size: 1rem;
     }
 }
 
-/* Privacy Page Specific Styles */
-.privacy-page-main {
-    background-color: #ffffff;
-    padding-bottom: 3rem;
-}
-
-.privacy-hero {
-    background: linear-gradient(rgba(20, 111, 245, 0.8), rgba(14, 78, 172, 0.8)); /* Use primary/secondary colors */
-    color: white;
-    text-align: center;
-    padding: 3rem 1rem 2rem; /* Slightly less padding than about hero */
-    margin-bottom: 3rem;
-}
-
-.privacy-hero .hero-content h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.privacy-hero .hero-subtitle {
-    font-size: 1.15rem;
-    font-weight: 400;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-}
-
-.effective-date {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-style: italic;
-}
-
-.privacy-content-container {
-    max-width: 900px;
-}
-
-.privacy-section {
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.privacy-intro {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #555;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.privacy-section h2 {
-    color: var(--secondary-color);
-    font-size: 1.6rem; /* Slightly smaller than About page */
-    font-weight: 600;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-color);
-    display: flex; /* Align icon with text */
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.privacy-section h2 i {
-    font-size: 1.4rem; /* Adjust icon size */
-}
-
-.privacy-section h3 {
-    color: var(--text-color);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-}
-
-.privacy-section p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 1rem;
-}
-
-.privacy-section ul {
-    list-style: none; /* Remove default bullets */
-    padding-left: 1.5rem; /* Indent list items */
-    margin-bottom: 1.5rem;
-}
-
-.privacy-section ul li {
-    margin-bottom: 0.75rem;
-    position: relative;
-    padding-left: 1rem; /* Space for custom bullet */
-}
-
-.privacy-section ul li::before {
-    content: '\2022'; /* Unicode bullet character */
-    color: var(--primary-color);
-    font-weight: bold;
-    display: inline-block; 
-    width: 1em;
-    margin-left: -1.5em; /* Position bullet */
-    position: absolute;
-    left: 0.5em;
-    top: 0;
-}
-
-.privacy-section a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.privacy-section a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive adjustments for Privacy Page */
-@media (max-width: 768px) {
-    .privacy-hero .hero-content h1 {
-        font-size: 2.2rem;
-    }
-
-    .privacy-section h2 {
-        font-size: 1.4rem;
-    }
-
-    .privacy-section h3 {
-        font-size: 1.1rem;
-    }
-
-    .privacy-section {
-        padding: 1.5rem;
-    }
-}
-
-/* Terms & Conditions Page Specific Styles */
-.terms-page-main {
-    background-color: #ffffff;
-    padding-bottom: 3rem;
-}
-
-.terms-hero {
-    background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(20, 20, 20, 0.8)); /* Neutral dark gradient */
-    color: white;
-    text-align: center;
-    padding: 3rem 1rem 2rem; 
-    margin-bottom: 3rem;
-}
-
-.terms-hero .hero-content h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.terms-hero .hero-subtitle {
-    font-size: 1.15rem;
-    font-weight: 400;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-}
-
-.terms-hero .effective-date { /* Reuse effective-date style */
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-style: italic;
-}
-
-.terms-content-container {
-    max-width: 900px;
-}
-
-.terms-section {
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.terms-intro {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #555;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.terms-section h2 {
-    color: var(--secondary-color);
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-color);
-    display: flex; 
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.terms-section h2 i {
-    font-size: 1.4rem;
-}
-
-.terms-section p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 1rem;
-}
-
-.terms-section ul {
-    list-style: none; 
-    padding-left: 1.5rem; 
-    margin-bottom: 1.5rem;
-}
-
-.terms-section ul li {
-    margin-bottom: 0.75rem;
-    position: relative;
-    padding-left: 1rem; 
-}
-
-.terms-section ul li::before {
-    content: '\2013'; /* En dash for list items */
-    color: var(--primary-color);
-    font-weight: bold;
-    display: inline-block; 
-    width: 1em;
-    margin-left: -1.5em; 
-    position: absolute;
-    left: 0.5em;
-    top: 0;
-}
-
-.terms-section a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.terms-section a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive adjustments for Terms Page */
-@media (max-width: 768px) {
-    .terms-hero .hero-content h1 {
-        font-size: 2.2rem;
-    }
-
-    .terms-section h2 {
-        font-size: 1.4rem;
-    }
-
-    .terms-section {
-        padding: 1.5rem;
-    }
+/* Remove Redundant/Old Blog Styles 
+.blog-container, 
+.blog-post, 
+.share-section, 
+.social-share {
+    display: none; // Example: Hide old styles completely
 } 
+    // ... (Keep other page styles like About, Contact, etc.) ... 
+*/
+
+
