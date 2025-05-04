@@ -44,7 +44,12 @@ body {
 .brand-container {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+}
+
+.brand-logo {
+    height: 40px; /* Adjust the height as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add some space between logo and icon */
 }
 
 .brand-icon {
