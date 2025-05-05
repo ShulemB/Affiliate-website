@@ -33,6 +33,8 @@ let currentPage = 1;
 const dealsPerPage = 10;
 let totalPages = 1;
 
+// Remove context menu variables
+
 // Format time since posting
 function getTimeSince(dateEntered) {
     const now = new Date();
@@ -567,10 +569,12 @@ function renderProducts(productsToRender) {
             const truncatedTitle = product.item.length > 52 
             ? product.item.substring(0, 52) + '...' 
             : (product.item.length < 40 ? product.item + '<br><br>' : product.item);
-
+            
+            const encodedTitle = product.item.replace(/\s+/g, '-');
+            const detailsUrl = `details.html?id=${product.ID}&item=${encodedTitle}`;
             
             return `
-                <div class="product-card ${isExpired ? 'expired' : ''}" data-product-id="${product.ID}">
+                <a href="${detailsUrl}" class="product-card ${isExpired ? 'expired' : ''}" data-product-id="${product.ID}" data-product-url="${product.link}">
                     <div class="card-header">
                         <div class="post-meta">
                             ${product.company} · ${timeSincePosted}
@@ -589,31 +593,31 @@ function renderProducts(productsToRender) {
                                     ${product.discount > 0 ? 
                                     `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
                                     ${product.promoCode ? `
-                                        <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
+                                        <button class="copy-btn" onclick="event.stopPropagation(); event.preventDefault(); copyToClipboard('${product.promoCode}')" ${isExpired ? 'disabled' : ''}>
                                             <i class="fas fa-copy"></i> COPY CODE
                                         </button>
                                     ` : ''}
                                     <div class="share-container">
-                                        <button class="share-btn-main" onclick="event.stopPropagation(); toggleShareButtons(${index})">
+                                        <button class="share-btn-main" onclick="event.stopPropagation(); event.preventDefault(); toggleShareButtons(${index})">
                                             <img src="Arrow.png" alt="Share" class="share-arrow">
                                         </button>
                                         <div class="share-buttons" id="share-buttons-${index}" style="display: none;">
-                                            <button onclick="event.stopPropagation(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
+                                            <button onclick="event.stopPropagation(); event.preventDefault(); shareOnPlatform('copy', '${product.link}', '${product.item}')" class="share-option">
                                                 <i class="fas fa-link"></i>
                                             </button>
-                                            <button onclick="event.stopPropagation(); shareOnPlatform('whatsapp', '${product.link}', '${product.item}')" class="share-option">
+                                            <button onclick="event.stopPropagation(); event.preventDefault(); shareOnPlatform('whatsapp', '${product.link}', '${product.item}')" class="share-option">
                                                 <i class="fab fa-whatsapp"></i>
                                             </button>
-                                            <button onclick="event.stopPropagation(); shareOnPlatform('facebook', '${product.link}', '${product.item}')" class="share-option">
+                                            <button onclick="event.stopPropagation(); event.preventDefault(); shareOnPlatform('facebook', '${product.link}', '${product.item}')" class="share-option">
                                                 <i class="fab fa-facebook-f"></i>
                                             </button>
-                                            <button onclick="event.stopPropagation(); shareOnPlatform('email', '${product.link}', '${product.item}')" class="share-option">
+                                            <button onclick="event.stopPropagation(); event.preventDefault(); shareOnPlatform('email', '${product.link}', '${product.item}')" class="share-option">
                                                 <i class="fas fa-envelope"></i>
                                             </button>
-                                            <button onclick="event.stopPropagation(); shareOnPlatform('twitter', '${product.link}', '${product.item}')" class="share-option">
+                                            <button onclick="event.stopPropagation(); event.preventDefault(); shareOnPlatform('twitter', '${product.link}', '${product.item}')" class="share-option">
                                                 <i class="fab fa-twitter"></i>
                                             </button>
-                                            <button onclick="event.stopPropagation(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
+                                            <button onclick="event.stopPropagation(); event.preventDefault(); shareOnPlatform('pinterest', '${product.link}', '${product.item}')" class="share-option">
                                                 <i class="fab fa-pinterest-p"></i>
                                             </button>
                                         </div>
@@ -631,29 +635,16 @@ function renderProducts(productsToRender) {
                            ${isExpired ? `
                                 <button class="buy-button expired" disabled>EXPIRED</button>
                             ` : `
-                                
-
-                                <button onclick="" class="buy-button">
-                                
+                                <button class="buy-button">
                                     VIEW DETAILS
                                 </button>
                             `}
                         </div>
                     </div>
-                </div>
+                </a>
             `;
         })
         .join('');
-
-    // Add click event listeners to product cards
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const productId = card.dataset.productId;
-            const product = products.find(p => p.ID === productId);
-            const encodedTitle = product.item.replace(/\s+/g, '-');
-            window.location.href = `details.html?id=${productId}&item=${encodedTitle}`;
-        });
-    });
 }
 
 // Event listeners
